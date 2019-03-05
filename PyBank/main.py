@@ -4,6 +4,8 @@ import csv
 
 #Path of the file
 csvpath = "budget_data.csv"
+#Path for file with the results
+output_path = "Results_budget_data.csv"
 
 count_months = 0
 net_amount = 0
@@ -47,12 +49,30 @@ max_decrease = min(record)
 date_increase = date[record.index(max_increase)]
 date_decrease = date[record.index(max_decrease)]
 
-#Printing the results  
+#Printing the results to the terminal
 print("Number of months : " + str(count_months))  
 print("Net Total amount : $" + str(net_amount))   
 print("Average changes  : $" + str(average_changes))    
 print("Greatest increase in profit: " + str(date_increase) + " " + str(max_increase))
-print("Greatest increase in profit: " + str(date_decrease) + " " + str(max_decrease))
+print("Greatest decrease in profit: " + str(date_decrease) + " " + str(max_decrease))
+
+
+#Write the results to file
+with open(output_path, 'w', newline='') as csvfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(csvfile, delimiter=',')
+
+    # Write the first row (title)
+    csvwriter.writerow(['Results Analysis Budget Data'])
+
+    # Write the contents
+    csvwriter.writerow(['Number of months:', count_months])
+    csvwriter.writerow(['Net Total amount:', net_amount])
+    csvwriter.writerow(['Average changes:', average_changes])
+    csvwriter.writerow(['Greatest increase in profit:', date_increase, max_increase])
+    csvwriter.writerow(['Greatest decrease in profi:', date_decrease, max_decrease])
+    print("File with results written!!")
 
       
       
