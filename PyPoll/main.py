@@ -3,10 +3,11 @@ import os
 import csv
 import operator
 
-#Path of the file
-csvpath = "election_data.csv"
-output_path = "election_results.csv"
+#Path of the input file
+csvpath = os.path.abspath("election_data.csv")
+
 #Path for file with the results
+output_path = os.path.abspath("election_results.txt")
 #output_path = "Results_budget_data.csv"
 
 count_votes = 0
@@ -93,30 +94,51 @@ print("--------------------------------------------")
 #Print the sublists with the results with percentage and totals
 for j in total_perc:
   print(str(j[0]) + ": " + str(j[1]) + " %  " + " (" + str(j[2]) + ")" + "\n")
-
 print("--------------------------------------------")
 print("The winner is: " + str(f[0]))
 print("--------------------------------------------")
 
-# 8-Write the results to file
-with open(output_path, 'w', newline='') as csvfile:
+# 8-Write the results to Text file
+file = open(output_path, "w")
 
-     # Initialize csv.writer
-     csvwriter = csv.writer(csvfile, delimiter=',')
+file.write("Election Results")
+file.write("\n--------------------------------------------")
+file.write("\nTotal number of votes: " + str(count_votes))
+file.write("\n--------------------------------------------")
+file.write("\n--------------------------------------------")
+file.write("\nCandidates who received votes:\n " )
+for k in uniq_candidates:
+        file.write(str(k) + "  ")
+file.write("\n--------------------------------------------")
+for j in total_perc:
+  file.write("\n" + str(j[0]) + ": " + str(j[1]) + " %  " + " (" + str(j[2]) + ")" + "\n")
+file.write("\n--------------------------------------------")
+file.write("\nThe winner is: " + str(f[0]))
+file.write("\n--------------------------------------------")
 
-     # Write the first row (title)
-     csvwriter.writerow(['Election Results'])
+file.close()
 
-     # Write the contents
-     csvwriter.writerow(['Total number of votes:', count_votes])
-     csvwriter.writerow(['Candidates who received votes:', uniq_candidates])
-     for m in total_perc:
-          csvwriter.writerow(str(m[0]) + ": " + str(m[1]) + " %  " + " (" + str(m[2]) + ")")
-        #print(str(j[0]) + ": " + str(j[1]) + " %  " + " (" + str(j[2]) + ")" + "\n")
-#     csvwriter.writerow(['Average changes:', average_changes])
-#     csvwriter.writerow(['Greatest increase in profit:', date_increase, max_increase])
-#     csvwriter.writerow(['Greatest decrease in profi:', date_decrease, max_decrease])
-     print("File with results written!!")
+# Alternative option
+# 8-Write the results to CSV file
+# with open(output_path, 'w', newline='') as csvfile:
+
+#      # Initialize csv.writer
+#      csvwriter = csv.writer(csvfile, delimiter=',')
+
+#      # Write the first row (title)
+#      csvwriter.writerow(['Election Results'])
+
+#      # Write the contents
+#      csvwriter.writerow(['Total number of votes:', count_votes])
+#      csvwriter.writerow(['Candidates who received votes:', uniq_candidates])
+#      for m in total_perc:
+#           csvwriter.writerow(m)
+#      csvwriter.writerow(['The winner is:', f[0]])
+
+#Confirm file written
+print("Text file with results written!! in: " + output_path)
+
+     
 
       
       
