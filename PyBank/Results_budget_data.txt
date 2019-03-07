@@ -1,0 +1,8 @@
+Result Analysis Budget Data
+--------------------------------------------
+Number of months: 86
+Net total amount: 38382578
+Average changes: -2315.12
+Greatest increase in profit: Feb-2012 1926159
+Greatest decrease in profit: Sep-2013 -2196167
+--------------------------------------------

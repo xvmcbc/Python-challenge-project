@@ -3,9 +3,10 @@ import os
 import csv
 
 #Path of the file
-csvpath = "budget_data.csv"
+csvpath = os.path.abspath("budget_data.csv")
 #Path for file with the results
-output_path = "Results_budget_data.csv"
+output_path = os.path.abspath("Results_budget_data.txt")
+#output_path = os.path.abspath("Results_budget_data.csv")
 
 count_months = 0
 net_amount = 0
@@ -57,22 +58,40 @@ print("Greatest increase in profit: " + str(date_increase) + " " + str(max_incre
 print("Greatest decrease in profit: " + str(date_decrease) + " " + str(max_decrease))
 
 
-#Write the results to file
-with open(output_path, 'w', newline='') as csvfile:
+# Write the results to Text file
+file = open(output_path, "w")
 
-    # Initialize csv.writer
-    csvwriter = csv.writer(csvfile, delimiter=',')
+file.write("Result Analysis Budget Data")
+file.write("\n--------------------------------------------")
+file.write("\nNumber of months: " + str(count_months))
+file.write("\nNet total amount: " + str(net_amount))
+file.write("\nAverage changes: " + str(average_changes))
+file.write("\nGreatest increase in profit: " + str(date_increase) + " " + str(max_increase))
+file.write("\nGreatest decrease in profit: " + str(date_decrease) + " " + str(max_decrease))
+file.write("\n--------------------------------------------")
 
-    # Write the first row (title)
-    csvwriter.writerow(['Results Analysis Budget Data'])
+file.close()
+    
+#Confirm file written
+print("Text file with results written!! in: " + output_path)
 
-    # Write the contents
-    csvwriter.writerow(['Number of months:', count_months])
-    csvwriter.writerow(['Net Total amount:', net_amount])
-    csvwriter.writerow(['Average changes:', average_changes])
-    csvwriter.writerow(['Greatest increase in profit:', date_increase, max_increase])
-    csvwriter.writerow(['Greatest decrease in profi:', date_decrease, max_decrease])
-    print("File with results written!!")
+
+#Alternate: Write the results to CSV file
+# with open(output_path, 'w', newline='') as csvfile:
+
+#     # Initialize csv.writer
+#     csvwriter = csv.writer(csvfile, delimiter=',')
+
+#     # Write the first row (title)
+#     csvwriter.writerow(['Results Analysis Budget Data'])
+
+#     # Write the contents
+#     csvwriter.writerow(['Number of months:', count_months])
+#     csvwriter.writerow(['Net Total amount:', net_amount])
+#     csvwriter.writerow(['Average changes:', average_changes])
+#     csvwriter.writerow(['Greatest increase in profit:', date_increase, max_increase])
+#     csvwriter.writerow(['Greatest decrease in profi:', date_decrease, max_decrease])
+#     print("File with results written!!")
 
       
       
